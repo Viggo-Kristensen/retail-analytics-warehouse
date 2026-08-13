@@ -1,42 +1,21 @@
+# Run from project root:
+# python -m analysis.delivery_analysis
+
+
 import matplotlib.pyplot as plt
 import sqlite3
 from pathlib import Path
+
+from database.repository import (
+    get_best_categories_year,
+    most_orders_product_category
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DB_PATH = BASE_DIR / "database" / "warehouse.db"
 
 connection = sqlite3.connect(DB_PATH)
 cursor = connection.cursor()
-
-def get_best_categories_year(cursor, year, limit):
-    cursor.execute("""
-    SELECT product_category_name, SUM(price)
-    FROM fact_sales
-    JOIN dim_product
-    ON fact_sales.product_id = dim_product.product_id
-    JOIN dim_date d
-    ON fact_sales.purchase_date_id = d.date_id
-    WHERE d.year = ?
-    GROUP BY dim_product.product_category_name
-    ORDER BY SUM(price) DESC
-    LIMIT ?
-    """, (year, limit))
-    return cursor.fetchall()
-
-def most_orders_product_category(cursor, year, limit):
-    cursor.execute("""
-    SELECT product_category_name, COUNT(order_id)
-    FROM fact_sales
-    JOIN dim_date d
-    ON fact_sales.purchase_date_id = d.date_id
-    JOIN dim_product
-    ON fact_sales.product_id = dim_product.product_id
-    where year = ?
-    GROUP BY product_category_name
-    ORDER BY COUNT(order_id) DESC
-    LIMIT ?
-    """, (year, limit))
-    return cursor.fetchall()
 
 # Initialise plots
 fig, axes = plt.subplots(1, 2, figsize=(12, 5))

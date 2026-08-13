@@ -1,9 +1,14 @@
-import sqlite3
-from pathlib import Path
-import matplotlib.pyplot as plt
+# Run from project root:
+# python -m analysis.delivery_analysis
 
-from database.repository import get_average_delivery_delay
-from database.repository import get_average_delivery_time
+import sqlite3
+import matplotlib.pyplot as plt
+from pathlib import Path
+
+from database.repository import (
+    get_average_delivery_delay,
+    get_average_delivery_time
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DB_PATH = BASE_DIR / "database" / "warehouse.db"
@@ -19,7 +24,6 @@ month_names = [
 
 # Initialising plots
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-
 
 # Plot 1 
 rows = get_average_delivery_delay(cursor, 2018)
