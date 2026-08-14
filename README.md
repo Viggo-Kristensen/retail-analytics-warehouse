@@ -1,4 +1,19 @@
-### Project file structure
+### Project description
+This project contains a retail analytics warehouse I have build around the OLIST e-commerce dataset. 
+
+### Warehouse structure
+The analytical database is build using a star-schema structure where sales is the central business activity to be analyzed. Around the 
+
+### Star-schema
+![star schema](star-schema/star_schema.png)
+
+
+
+
+
+
+
+Project structure
 .
 ├── analysis
 │   ├── delivery_performance.py
