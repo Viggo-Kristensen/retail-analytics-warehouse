@@ -1,17 +1,14 @@
 ## Project description
 This project contains a retail analytics warehouse I have build around the OLIST e-commerce dataset. 
 
-### Warehouse structure
-The analytical database is build using a star-schema structure where sales is the central business activity to be analyzed. 
+The original data files from the Olist dataset is structured in a normalized relational database which is optimized for operational usage. Through an ETL process i have transformed the data and inserted it into my sqlite datawarehouse. The analytical database is build around a star-schema structure where sales is the central business activity to be analyzed. The dimensions surrounding the fact_sales table are `dim_product`, `dim_seller`, `dim_customer` and `dim_date`. In the original dataset the sales are not stored explicitly in rows. Instead 
 
 ### Star-schema
-![star schema](star-schema/star_schema.png)
+![star schema](star_schema/star_schema.png)
 
-
-
-
-
-
+### How to run 
+- To create the analytical database run `main.py` from the root of the project.
+- To generate the plots for the analysis run python -m analysis.delivery_analysis in the terminal
 
 ### Project structure
 ```
