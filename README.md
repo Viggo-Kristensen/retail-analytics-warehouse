@@ -13,8 +13,8 @@ The analytical database is build using a star-schema structure where sales is th
 
 
 
-Project structure
-`
+### Project structure
+```
 .
 ├── analysis
 │   ├── delivery_performance.py
@@ -50,7 +50,7 @@ Project structure
 │   ├── delivery_performance.png
 │   ├── product_category_performance.png
 │   └── sales_performance.png
-└── star-schema
+└── star_schema
     ├── notes.md
     └── star_schema.png
-`
+```
