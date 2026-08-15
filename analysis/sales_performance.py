@@ -1,5 +1,5 @@
 # Run from project root:
-# python -m analysis.delivery_analysis
+# python -m analysis.sales_performance
 
 import sqlite3
 from pathlib import Path

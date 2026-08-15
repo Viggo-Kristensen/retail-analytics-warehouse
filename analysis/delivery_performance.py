@@ -1,5 +1,5 @@
 # Run from project root:
-# python -m analysis.delivery_analysis
+# python -m analysis.delivery_performance
 
 import sqlite3
 import matplotlib.pyplot as plt

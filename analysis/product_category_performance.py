@@ -1,6 +1,5 @@
 # Run from project root:
-# python -m analysis.delivery_analysis
-
+# python -m analysis.product_category_performance
 
 import matplotlib.pyplot as plt
 import sqlite3

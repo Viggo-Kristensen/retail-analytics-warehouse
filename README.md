@@ -1,33 +1,33 @@
 ## Project description
-This project contains a retail analytics warehouse build around the OLIST e-commerce dataset. 
+This project contains a retail analytics warehouse build around the OLIST e-commerce dataset.
+Raw CSV data → Pandas ETL → SQLite star schema → SQL analysis → Visualizations 
 
 ### Dataset
-The dataset used is `Brazilian E-Commerce Public Dataset` by Olist from 2018. The dataset contains information from over 100k orders that where made from 2016 to 2018 on Brazilian markedplaces. The data is structured like a normalized relational database that is optimized for operational use. Among other things tables included are orders, products, sellers and customers.
+The dataset used is `Brazilian E-Commerce Public Dataset` by Olist from 2018. The dataset contains information from over 100k orders made from 2016 to 2018 on Brazilian marketplaces. The data is structured like a normalized relational database that is optimized for operational use. Among other things tables included are orders, products, sellers and customers.
 
 ### Database
-The project uses an SQLite3 database. That means that the database used is serverless and the tables are stored in the warehouse.db file. `schema.py` encompasses the code that is needed to initialise the tables in SQLite and `repositary.py` contains all the SQL queries used in the analysis.
+The project uses an SQLite3 database. That means that the database is serverless and the tables are stored in a warehouse.db file. `schema.py` encompasses the code that is needed to initialize the tables in SQLite3 and `repository.py` contains all the SQL queries used for the analysis. 
 
 ### Star-schema
-The analytical database is build around a star-schema structure where sales is the central business activity to be analyzed.
-- fact_sales: The fact_sales table mainly stores the primary key `sales_id` aswell as the forreign keys referencing the dimension tables surrounding it.
+The analytical database is built around a star-schema structure where sales is the central business activity to be analyzed.
+- fact_sales: The fact_sales stores information ab
+fact_sales stores information about the sales table mainly stores the primary key `sales_id` as well as the foreign keys referencing the dimension tables surrounding it.
 - dim_customer: Primarily Stores geographical information about the customers.  
-- dim_product: Stores descriptional informations about the products that Olist sell.
-- dim_seller: Keeps information on all the independent sellers that use Olist markedplace to sell items.
-- dim_date: The date dimensions just stores calendar attributes (year, month day) which is usefull for timebased analysis. It functions as a roleplaying dimension by being able to use it for multiple types of time data that the fact_sales keeps.
+- dim_product: Stores descriptive informations about the products that Olist sells.
+- dim_seller: Keeps information on all the independent sellers that use Olist marketplace to sell items.
+- dim_date: Stores calendar attributes such as year, month and day which is useful for time-based analysis. It functions as a role-playing dimension allowing it to be used for different date attributes kept in the fact_sales.
 
 ![star schema](star_schema/star_schema.png)
 
 ### ETL
-To get the data from the csv file format into the analytical warehouse an ETL process was used. Firstly the csv data files was extracted and saved as dataframes. The tables needed for the warehouse were then constructed by transforming the data using pandas to upload and convert it to SQL.
-
-
-
-### Analysis
-business_analysis.md contains a business analysis i have made based on the plots i have created from the sales star-schema.
+To get the data from the csv file format into the analytical warehouse an ETL process was used. Firstly the csv data files was extracted and saved as dataframes. The tables needed for the warehouse were then constructed by transforming the data using pandas before it was uploaded and converted into SQL.
 
 ### How to run 
 - To create the analytical database run `main.py` from the root of the project.
-- To generate the plots for the analysis run python -m analysis.delivery_analysis in the terminal
+- To generate each of the plots for the analysis run: 
+    - python -m analysis.delivery_performance 
+    - python -m analysis.product_category_performance
+    - python -m analysis.sales_performance
 
 ### Project structure
 ```
@@ -70,12 +70,3 @@ business_analysis.md contains a business analysis i have made based on the plots
     ├── notes.md
     └── star_schema.png
 ```
-
-
-
-#__________
-The original data files from the Olist dataset is structured in a normalized relational database which is optimized for operational usage. Through an ETL process i have transformed the data and inserted it into my sqlite datawarehouse. The analytical database is build around a star-schema structure where sales is the central business activity to be analyzed. The dimensions surrounding the `fact_sales` table are `dim_product`, `dim_seller`, `dim_customer` and `dim_date`. 
-
-# will not use 
-In the original dataset the sales are not stored explicitly in rows. Instead they have a orders dataset where the primary key is a combination of order_id and 
-#____________________
