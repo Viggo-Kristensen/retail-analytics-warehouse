@@ -4,20 +4,23 @@ This project contains a retail analytics warehouse build around the OLIST e-comm
 ### Dataset
 The dataset used is `Brazilian E-Commerce Public Dataset` by Olist from 2018. The dataset contains information from over 100k orders that where made from 2016 to 2018 on Brazilian markedplaces. The data is structured like a normalized relational database that is optimized for operational use. Among other things tables included are orders, products, sellers and customers.
 
-### ETL
-To get the data from the csv file format into the analytical warehouse an ETL process was used. Firstly the csv data files was extracted and saved as dataframes. The tables needed for the warehouse were then constructed by transforming the data using pandas and uploaded and changed to SQL.
-
 ### Database
-The database used was SQLite3.
+The project uses an SQLite3 database. That means that the database used is serverless and the tables are stored in the warehouse.db file. `schema.py` encompasses the code that is needed to initialise the tables in SQLite and `repositary.py` contains all the SQL queries used in the analysis.
 
 ### Star-schema
-- fact_sales:
-- dim_customer:
-- dim_product:
-- dim_seller:
-- dim_date:
+The analytical database is build around a star-schema structure where sales is the central business activity to be analyzed.
+- fact_sales: The fact_sales table mainly stores the primary key `sales_id` aswell as the forreign keys referencing the dimension tables surrounding it.
+- dim_customer: Primarily Stores geographical information about the customers.  
+- dim_product: Stores descriptional informations about the products that Olist sell.
+- dim_seller: Keeps information on all the independent sellers that use Olist markedplace to sell items.
+- dim_date: The date dimensions just stores calendar attributes (year, month day) which is usefull for timebased analysis. It functions as a roleplaying dimension by being able to use it for multiple types of time data that the fact_sales keeps.
 
 ![star schema](star_schema/star_schema.png)
+
+### ETL
+To get the data from the csv file format into the analytical warehouse an ETL process was used. Firstly the csv data files was extracted and saved as dataframes. The tables needed for the warehouse were then constructed by transforming the data using pandas to upload and convert it to SQL.
+
+
 
 ### Analysis
 business_analysis.md contains a business analysis i have made based on the plots i have created from the sales star-schema.
