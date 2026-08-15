@@ -1,6 +1,8 @@
 ## Project description
 This project contains a retail analytics warehouse build around the OLIST e-commerce dataset.
-Raw CSV data → Pandas ETL → SQLite star schema → SQL analysis → Visualizations 
+
+
+**Raw CSV data → Pandas ETL → SQLite star schema → SQL analysis → Visualizations** 
 
 ### Dataset
 The dataset used is `Brazilian E-Commerce Public Dataset` by Olist from 2018. The dataset contains information from over 100k orders made from 2016 to 2018 on Brazilian marketplaces. The data is structured like a normalized relational database that is optimized for operational use. Among other things tables included are orders, products, sellers and customers.
@@ -10,17 +12,16 @@ The project uses an SQLite3 database. That means that the database is serverless
 
 ### Star-schema
 The analytical database is built around a star-schema structure where sales is the central business activity to be analyzed.
-- fact_sales: The fact_sales stores information ab
-fact_sales stores information about the sales table mainly stores the primary key `sales_id` as well as the foreign keys referencing the dimension tables surrounding it.
-- dim_customer: Primarily Stores geographical information about the customers.  
-- dim_product: Stores descriptive informations about the products that Olist sells.
+- fact_sales: The central fact table storing the foreign keys for the surrounding dimensions and sales-related measures such as price and freight value.
+- dim_customer: Primarily stores geographical information about the customers.  
+- dim_product: Stores descriptive information about the products that Olist sells.
 - dim_seller: Keeps information on all the independent sellers that use Olist marketplace to sell items.
-- dim_date: Stores calendar attributes such as year, month and day which is useful for time-based analysis. It functions as a role-playing dimension allowing it to be used for different date attributes kept in the fact_sales.
+- dim_date: Stores calendar attributes such as year, month and day which is useful for time-based analysis. It functions as a role-playing dimension allowing the same date dimension to be used for different date attributes in the fact_sales table.
 
 ![star schema](star_schema/star_schema.png)
 
 ### ETL
-To get the data from the csv file format into the analytical warehouse an ETL process was used. Firstly the csv data files was extracted and saved as dataframes. The tables needed for the warehouse were then constructed by transforming the data using pandas before it was uploaded and converted into SQL.
+The CSV files are first extracted into pandas DataFrames. The tables are then constructed by transforming the raw data using pandas before being loaded into SQLite.
 
 ### How to run 
 - To create the analytical database run `main.py` from the root of the project.
@@ -32,6 +33,7 @@ To get the data from the csv file format into the analytical warehouse an ETL pr
 ### Project structure
 ```
 .
+├── README.md
 ├── analysis
 │   ├── delivery_performance.py
 │   ├── product_category_performance.py
