@@ -1,10 +1,26 @@
 ## Project description
-This project contains a retail analytics warehouse I have build around the OLIST e-commerce dataset. 
+This project contains a retail analytics warehouse build around the OLIST e-commerce dataset. 
 
-The original data files from the Olist dataset is structured in a normalized relational database which is optimized for operational usage. Through an ETL process i have transformed the data and inserted it into my sqlite datawarehouse. The analytical database is build around a star-schema structure where sales is the central business activity to be analyzed. The dimensions surrounding the fact_sales table are `dim_product`, `dim_seller`, `dim_customer` and `dim_date`. In the original dataset the sales are not stored explicitly in rows. Instead 
+### Dataset
+The dataset used is `Brazilian E-Commerce Public Dataset` by Olist from 2018. The dataset contains information from over 100k orders that where made from 2016 to 2018 on Brazilian markedplaces. The data is structured like a normalized relational database that is optimized for operational use. Among other things tables included are orders, products, sellers and customers.
+
+### ETL
+To get the data from the csv file format into the analytical warehouse an ETL process was used. Firstly the csv data files was extracted and saved as dataframes. The tables needed for the warehouse were then constructed by transforming the data using pandas and uploaded and changed to SQL.
+
+### Database
+The database used was SQLite3.
 
 ### Star-schema
+- fact_sales:
+- dim_customer:
+- dim_product:
+- dim_seller:
+- dim_date:
+
 ![star schema](star_schema/star_schema.png)
+
+### Analysis
+business_analysis.md contains a business analysis i have made based on the plots i have created from the sales star-schema.
 
 ### How to run 
 - To create the analytical database run `main.py` from the root of the project.
@@ -51,3 +67,12 @@ The original data files from the Olist dataset is structured in a normalized rel
     ├── notes.md
     └── star_schema.png
 ```
+
+
+
+#__________
+The original data files from the Olist dataset is structured in a normalized relational database which is optimized for operational usage. Through an ETL process i have transformed the data and inserted it into my sqlite datawarehouse. The analytical database is build around a star-schema structure where sales is the central business activity to be analyzed. The dimensions surrounding the `fact_sales` table are `dim_product`, `dim_seller`, `dim_customer` and `dim_date`. 
+
+# will not use 
+In the original dataset the sales are not stored explicitly in rows. Instead they have a orders dataset where the primary key is a combination of order_id and 
+#____________________
